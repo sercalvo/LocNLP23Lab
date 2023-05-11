@@ -183,12 +183,12 @@ def analyze_text(text, nlp):
         
     with st.container():
         # Display a section header:
-        st.header("Named entity Visualizer")
+        st.header("Named entities in the text")
         # Print a visualization of named entities
         st.write(visualize_ner(doc))
     
         # Display a section header:
-        st.header("Dependency visualizer")
+        st.header("Dependency analysis for the first sentence")
         # Print a visualization of a dependency parse
         st.write(visualize_dep(list(doc.sents)[0]))
 
@@ -203,18 +203,15 @@ def analyze_text(text, nlp):
 # Add a submit button
 #if st.button("Submit2"):        
     # Show the visualizations
-    st.write("Visualizations:")
-    #with st.columns(2):    
-    col1, col2 = st.columns(2)
-    with col1:   
-        show_visualizations_1_NER(df)
-    with col2:
-        show_visualizations_2(df)
-    show_visualizations_3(df)
+    st.write("Visualizations")
+
     show_visualizations_4(df)
     show_visualizations_5(create_linguistic_df(text))
     show_visualizations_6(create_linguistic_df(text))
     #show_visualizations_7(calculate_tfidf(text))
+    create_linguistic_df(text)
+    
+    
 
 
 # Run the main function
