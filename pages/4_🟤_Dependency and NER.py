@@ -12,7 +12,7 @@ from spacy import displacy
 import spacy
 from spacy import displacy
 
-st.title(":large_brown_circle: Dependency & NER Analyzer :curly_loop: ")
+st.title(":large_brown_circle: Dependency & Entity Analyzer :curly_loop: ")
 st.markdown("Perform real-time analysis of a text to extract features and see a magical visualization of syntactical dependencies and named entities.")
 # Load the English model in Spacy
 #nlp = spacy.load("en_core_web_sm")

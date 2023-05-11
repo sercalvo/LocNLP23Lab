@@ -22,9 +22,10 @@ with st.expander("ℹ️ - About this app", expanded=False):
     st.write(
         """     
 -   This app is an easy-to-use interface built in Streamlit that uses [KeyBERT](https://github.com/MaartenGr/KeyBERT) library from Maarten Grootendorst!
--   It uses a minimal keyword extraction technique that leverages multiple NLP embeddings and relies on [Transformers](https://huggingface.co/transformers/) 🤗 to extract the most relevant keywords/keyphrases, that is to say, the terms in the text!
--   It also uses [Flair](https://github.com/flairNLP/flair) to help adding a pipeline to use the Roberta language model from HuggingFace.
--   Finally, as a translator would suggest, it also has the option to save the file as TBX or CSV.
+-   It uses a minimal keyword extraction technique that leverages multiple NLP embeddings and relies on `Transformers` from Hugging Face 🤗 to extract the most relevant keywords/keyphrases, that is to say, the terms in the text!
+-   It also uses `Flair` to help adding a pipeline for the Roberta language model from HuggingFace.
+-   And it also integrates `keyphrase-vectorizers` to automatically select the best approach regarding how many n-grams to include.
+-   Finally, as a translator would suggest, it also has the option to save the terms in CSV.   
 	    """
     )
 

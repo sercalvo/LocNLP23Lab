@@ -42,7 +42,7 @@ d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
 
 
 # read the mask image taken from
-mask = np.array(Image.open(path.join(d, "..\\img\\clouds.png")))
+mask = np.array(Image.open(path.join(d, "img//clouds.png")))
 
 # adding movie script specific stopwords
 stopwords = set(STOPWORDS)
@@ -163,7 +163,7 @@ else:
             plt.show()
             
         
-        generate_wordcloud(texto,"Una nube de palabras de prueba","clouds.png")
+        generate_wordcloud(texto,"Una nube de palabras de prueba","img//clouds.png")
         finished = st.pyplot(plt)
             
     
