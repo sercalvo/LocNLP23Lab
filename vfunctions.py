@@ -63,30 +63,6 @@ def open_file(file):
 # Load the English language model in SpaCy
 nlp = spacy.load("en_core_web_sm")
 
-# Define a function to tokenize, lemmatize, and extract dependencies, POs, and ents
-def process_text(text):
-    # Tokenize and lemmatize the text
-    doc = nlp(text)
-    tokens = [token.text for token in doc]
-    lemmas = [token.lemma_ for token in doc]
-
-    # Extract dependencies, POs, and ents
-    dependencies = [token.dep_ for token in doc]
-    part_of_speech = [token.pos_ for token in doc]
-    entities = [token.ent_type_ for token in doc]
-
-    # Create a dataframe with the processed text
-    df = pd.DataFrame(
-        {
-            "token": tokens,
-            "lemma": lemmas,
-            "dependency": dependencies,
-            "part_of_speech": part_of_speech,
-            "entity": entities,
-        }
-    )
-    return df
-
 
 # Define a function to display the dataframe in the app
 def show_magic_dataframe(df):
@@ -237,16 +213,66 @@ def most_repeated_adverbs(text, nlp):
     return most_repeated_tokens(text, nlp, "ADV")
 
 
+def most_repeated_named_entities(text, nlp):
+    doc = nlp(text)
+    ner_counts = {}
+    for ent in doc.ents:
+        label = ent.label_
+        if label not in ner_counts:
+            ner_counts[label] = {}
+        if ent.text in ner_counts[label]:
+            ner_counts[label][ent.text] += 1
+        else:
+            ner_counts[label][ent.text] = 1
+    return ner_counts
+
+
+
+
+# Define a function to tokenize, lemmatize, and extract dependencies, POs, and ents
+def process_text(text):
+    # Tokenize and lemmatize the text
+    doc = nlp(text)
+    tokens = [token.text for token in doc]
+    lemmas = [token.lemma_ for token in doc]
+
+    # Extract dependencies, POs, and ents
+    dependencies = [token.dep_ for token in doc]
+    part_of_speech = [token.pos_ for token in doc]
+    entities = [token.ent_type_ for token in doc]
+
+    # Create a dataframe with the processed text
+    df = pd.DataFrame(
+        {
+            "token": tokens,
+            "lemma": lemmas,
+            "dependency": dependencies,
+            "part_of_speech": part_of_speech,
+            "entity": entities,
+        }
+    )
+    return df
 
 
 
 # Define a function to visualize the data: columns
-def show_visualizations_1(df):
+def show_visualizations_1_POS(df):
     # Calculate the counts of each part of speech
     pos_counts = df["part_of_speech"].value_counts()
 
     # Plot the part of speech counts as a bar chart
     st.bar_chart(pos_counts)
+
+# Define a function to visualize the data: columns
+def show_visualizations_1_NER(df):
+    # Filter out blank entities
+    ner_entities = df[df["entity"] != ""]
+    
+    # Calculate the counts of each named entity
+    ner_counts = ner_entities["entity"].value_counts()
+
+    # Plot the named entity counts as a bar chart
+    st.bar_chart(ner_counts)
 
     
 # Define a function to visualize the data: pie
@@ -307,6 +333,8 @@ def show_visualizations_4(df):
     with tab2:
         # Use the native Plotly theme.
         st.plotly_chart(fig, theme=None, use_container_width=True)
+
+
     
 # Define a function to create a dataframe with linguistic statistics
 def create_linguistic_df(text):

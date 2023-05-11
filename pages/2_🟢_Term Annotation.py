@@ -60,8 +60,8 @@ def annotate_keyphrases(text, phrases):
         final_text = final_text.replace(phrase, f"`<term>`**{phrase}**`</term>`")
 
     # Printo to screen the annotated texts
-    st.write("## Term mark-up using Displacy spans")
-    st.text("This visualization uses Spacy and the visualizer Displacy to mark up the terms given the the list.")
+    st.subheader("Term mark-up using Displacy spans")
+    st.success("This visualization uses Spacy and the visualizer Displacy to mark up the terms given the list.")
     options = {"ents": ["TERM"],
                "colors": {"TERM": "#fabc02"}}
 
@@ -131,7 +131,7 @@ if "checkbox" not in st.session_state:
 # Add a page title for the app
 st.title(':large_green_circle: Term Annotation :male-detective:')
 st.markdown(
-    'This app makes use of Spacy library to provide a nice visualization of terms and keywords')
+    'This app makes use of `Spacy` library to provide nice visualizations of terms and keywords.')
 
 # Add a header for the first section: Select text
 st.header("Add your text and terms to annotate")
@@ -149,11 +149,11 @@ terms = []
 # Add a form for the user to paste a text
 with st.form(key='my_annotation'):
     input_text = st.text_area(
-        "**Copy and paste your text to annotate**", "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy.", height=150, key="my_input_area", max_chars=501)
-    input_phrases = "".join(st.text_input('**Add your own keywords, phrases or terms separated by comma**', 'sample term',
+        "Copy and paste your text to annotate", "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy.", height=150, key="my_input_area", max_chars=501)
+    input_phrases = "".join(st.text_input('Add your own keywords, phrases or terms separated by comma', 'sample term',
                                   key="my_input_kw_area", help="Use comma without space to separate the terms like: electrical energy,kinetic energy,modern wind turbines,rotational energy,wind,rotor blades,motion,generator")).split(sep=",")
     #input_phrases = input_phrases.split()
-    agree = st.checkbox('Extract terms automatically')    
+    agree = st.checkbox('Extract terms automatically', help="Automatic terminology extraction will extract the best 10 candidates using several algorithms to identify the most relevant collocations or single words.")    
     # Create two columns for two buttons
     f1, f2 = st.columns(2)
     with f1:     
@@ -221,7 +221,7 @@ sample_text = ""
 sample_phrases = ""
 #st.session_state["disabled"] = False
 if sample_text_checkbox:
-    st.write("## 2. Text and terms preview")
+    st.header("Preview text and terms")
     # Define the text to be processed
     sample_text = "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy."
     # Define the phrases to be found and annotated in the text
@@ -251,7 +251,7 @@ if gettext_button:
     elif input_text == "" and input_phrases != "":
         st.warning(":question: Knock-knock... where is the text? ")
     else:
-        st.write("## 2. Text and terms preview ")
+        st.subheader("Preview text and terms ")
         st.write('**The text to be processed :point_down:**')
         #input_phrases = input_phrases.split(sep=",")
         c5, c6 = st.columns([1, 3])
@@ -299,7 +299,7 @@ button1 = st.button("Annotate the text", key="button1")
 
     
 if button1:
-    st.write("## 3. Visualize and annotate the text")
+    st.header("Visualize and annotate the text")
     annotate_keyphrases(text, final_phrases)
 
     

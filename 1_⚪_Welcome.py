@@ -33,13 +33,13 @@ st.markdown(
     \n### Welcome to the place where I test my NLP apps ideas!
     \nYou will find some kind of magic, but it's a matter of believing or not. I do believe in the magic of computational linguistics and natural language processing.
     \nI'm sharing a few examples of how using Python and some available libraries and resources, a few things can be done. 
-    I built this app using Streamlit, an open-source app framework built specifically for
-    Machine Learning and Data Science projects. And of course, it includes many othe libraries like Spacy, NLTK, Transformers, Pandas, scikit-learn, Beautiful Soup, TextBlob, Gensim, PyTorch...
+    I have built this app using `Streamlit`, an open-source app framework built specifically for
+    Machine Learning and Data Science projects. Behind, there's a full range of libraries and Python code, of course. I am not an expert, but do take advantage of libraries like `Spacy`, `NLTK`, `Transformers`, `Pandas`, `scikit-learn`, `Beautiful Soup`, `TextBlob`, `Gensim`, `PyTorch` and other libraries.
+    \nThe goal? Unveil the secrets of languages, no matter if they are meant for humans or computers.
     \nEnjoy the ride! 	:bike:
     \n:smiley: Sergio Calvo
     \n
     \n### Want to learn more?
-    \n**👈 Select a demo from the sidebar** to see some examples
-    of NLP apps!
+    \n**👈 Select a demo from the sidebar** to see some NLP app examples!
 """
 )

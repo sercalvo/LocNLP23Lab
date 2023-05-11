@@ -39,7 +39,7 @@ pos_options = {
 # Add a page title for the app
 st.title(':large_green_circle: Text Annotation :female-detective:')
 st.markdown(
-    'This app makes use of Spacy and st-annotated-text libraries to provide a nice visualization of words per part of speech.')
+    'This app makes use of `Spacy` and `st-annotated-text` libraries to provide nice visualizations of words per part of speech.')
 
 # Add a header for the first section: Select text
 st.header("Add your text to analyze and annotate")
