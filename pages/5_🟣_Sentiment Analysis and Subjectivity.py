@@ -20,6 +20,7 @@ import plotly.graph_objects as go
 # Download necessary NLTK packages and corpora
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
 
 # Define an official taxonomy of text types and subject matter
 taxonomy = {
