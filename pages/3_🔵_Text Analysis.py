@@ -209,7 +209,7 @@ def analyze_text(text, nlp):
     show_visualizations_5(create_linguistic_df(text))
     show_visualizations_6(create_linguistic_df(text))
     #show_visualizations_7(calculate_tfidf(text))
-    create_linguistic_df(text)
+    #create_linguistic_df(text)
     
     
 
