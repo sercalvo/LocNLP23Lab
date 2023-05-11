@@ -17,9 +17,3 @@ streamlit==1.21.0
 sumy==0.11.0
 textblob==0.17.1
 wordcloud==1.8.2.2
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.3.0/en_core_web_sm-3.3.0-py3-none-any.whl
-
-https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.3.0/en_core_web_md-3.3.0.tar.gz#egg=en_core_web_md==3.3.0
-
-https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.3.0/es_core_news_sm-3.3.0.tar.gz#egg=es_core_news_sm==3.3.0
-https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.3.0/es_core_news_md-3.3.0.tar.gz#egg=es_core_news_md==3.3.0
