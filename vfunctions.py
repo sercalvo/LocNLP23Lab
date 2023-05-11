@@ -17,6 +17,10 @@ import altair as alt
 import nltk
 from collections import Counter
 
+# Download necessary NLTK packages and corpora
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
 
 @st.cache_data
 def verikeybert(text, hits):
