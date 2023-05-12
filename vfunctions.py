@@ -75,7 +75,7 @@ def show_magic_dataframe(df):
 
     col1, col2 = st.columns([1,2])
     with col1:
-        st.caption("**The Magic NLP Dataframe**")
+        st.caption("**:orange[The Magic NLP Dataframe]**")
         # Allow the user to select which columns to display
         selected_columns = st.multiselect("Select columns to display", columns)   
     with col2:

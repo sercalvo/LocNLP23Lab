@@ -33,7 +33,7 @@ def main():
     
     # Get some sample text
     sample_text = """
-    The the quick brown fox jumps over the lazy dog. San Francisco has reversed its decision to authorise police to use robots equipped with lethal weapons.The proposal, which was passed last week by the city's legislators, the board of supervisors, would have allowed police to access robots that can kill. It had faced fierce criticism from civil liberties groups. After voting unanimously to pause the proposal on Tuesday, the board sent the issue to committee for further review. The measure would have allowed the San Francisco Police Department (SFPD) to kill suspects with robots in extreme situations. The vote came following a new California law requiring city police forces to keep inventories of military-grade equipment and seek approval for their use. Dr Catherine Connolly, from the group Stop Killer Robots, told the BBC the move was a "slippery slope" that could distance humans from killing. Protesters and several dissenting board members gathered on the steps of city hall to call for the city to reverse its decision. In a secondary vote, usually reserved to rubber-stamp board decisions, they decided to overturn their vote. The original proposal will now be refined or entirely scrapped. Police have argued that the robots would only be used in extreme circumstances. A spokesperson for SFPD said "robots could potentially be equipped with explosive charges to breach fortified structures containing violent, armed, or dangerous subjects". They also said robots could be used to "incapacitate, or disorient violent, armed, or dangerous suspects who pose a risk of loss of life". This type of lethal robot is already in use in other parts of the US. In 2016, police in Dallas, Texas, used a robot armed with C-4 explosive to kill a sniper who had killed five officers and injured several more.
+    The the quick brown fox jumps over the lazy dog. 
     """
     
     text = ""
@@ -46,7 +46,13 @@ def main():
     if option == "Paste text":
         text = st.text_area("Paste your text here", "")
     elif option == "Use sample text":
-        text = sample_text
+        sample_data = {
+            "Text 1": "The quick brown fox jumps over the lazy dog.",
+            "Text 2": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
+            "Text 3": "San Francisco has reversed its decision to authorise police to use robots equipped with lethal weapons.The proposal, which was passed last week by the city's legislators, the board of supervisors, would have allowed police to access robots that can kill. It had faced fierce criticism from civil liberties groups. After voting unanimously to pause the proposal on Tuesday, the board sent the issue to committee for further review. The measure would have allowed the San Francisco Police Department (SFPD) to kill suspects with robots in extreme situations. The vote came following a new California law requiring city police forces to keep inventories of military-grade equipment and seek approval for their use. Dr Catherine Connolly, from the group Stop Killer Robots, told the BBC the move was a 'slippery slope' that could distance humans from killing. Protesters and several dissenting board members gathered on the steps of city hall to call for the city to reverse its decision. In a secondary vote, usually reserved to rubber-stamp board decisions, they decided to overturn their vote. The original proposal will now be refined or entirely scrapped. Police have argued that the robots would only be used in extreme circumstances. A spokesperson for SFPD said 'robots could potentially be equipped with explosive charges to breach fortified structures containing violent, armed, or dangerous subjects'. They also said robots could be used to 'incapacitate, or disorient violent, armed, or dangerous suspects who pose a risk of loss of life'. This type of lethal robot is already in use in other parts of the US. In 2016, police in Dallas, Texas, used a robot armed with C-4 explosive to kill a sniper who had killed five officers and injured several more.",
+            }
+        selected_sample = st.selectbox('Select sample data', list(sample_data.keys()))
+        text = sample_data[selected_sample]
     elif option == "Upload file":
         file = st.file_uploader("Choose a file")
         # Get the contents of the file as a string
@@ -75,7 +81,9 @@ def main():
         # Process the text
         df = process_text(text)
         
-        st.divider()  
+        st.divider() 
+        with open("style.css") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)  
         
         # Show the dataframe as a table
         st.subheader("The Magic NLP Dataframe :smile:")
@@ -95,14 +103,7 @@ def main():
             # Show the rough statistical analysis
             analyze_text(text, nlp)
             
-            # Show the visualizations
-            st.write("Visualizations:")
-            #with st.columns(2):    
-            col1, col2 = st.columns(2)
-            with col1:   
-                show_visualizations_1_NER(df)
-            with col2:
-                show_visualizations_2(df)
+            
 
 
 # Define a function to analyze a text and print the results
@@ -213,9 +214,9 @@ def analyze_text(text, nlp):
     # Show the visualizations
     st.write("Visualizations")
 
-    show_visualizations_4(df)
-    show_visualizations_5(create_linguistic_df(text))
-    show_visualizations_6(create_linguistic_df(text))
+    #show_visualizations_4(df)
+    #show_visualizations_5(create_linguistic_df(text))
+    #show_visualizations_6(create_linguistic_df(text))
     #show_visualizations_7(calculate_tfidf(text))
     #create_linguistic_df(text)
     
