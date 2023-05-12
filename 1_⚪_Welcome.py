@@ -38,8 +38,16 @@ st.markdown(
     \nThe goal? Unveil the secrets of languages, no matter if they are meant for humans or computers.
     \nEnjoy the ride! 	:bike:
     \n:smiley: Sergio Calvo
-    \n
-    \n### Want to learn more?
-    \n**👈 Select a demo from the sidebar** to see some NLP app examples!
 """
 )
+
+with st.expander("About Sergio"):
+    st.write("Translator, reviewer and computational linguist with 20+ years of experience in multiple translation and localization areas, NLP (Natural Language Processing) and localization engineering. He is passionate for going deep in the entrails of any language, either spoken by humans or computer machines, to unveil the beauty of communicating.")
+
+st.markdown(
+    """
+   \n
+   \n### Want to learn more?
+   \n**👈 Select a demo from the sidebar** to see some NLP app examples!
+   """
+   )
