@@ -11,7 +11,7 @@ import os
 from os import path
 
 st.set_page_config(
-    page_title="LocNLPLab23",
+    page_title="LocNLP23Lab",
     page_icon="img\\V-Logo-icon48.png",
 )
 from PIL import Image
