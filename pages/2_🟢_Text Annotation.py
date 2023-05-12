@@ -11,6 +11,14 @@ import streamlit as st
 import spacy
 from annotated_text import annotated_text
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Text Annotation",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 
 def generate_annotated_text(text, pos_options, pos_select):
     doc = nlp(text)

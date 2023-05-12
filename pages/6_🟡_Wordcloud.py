@@ -17,6 +17,14 @@ from os import path
 import nltk
 import time
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Wordcloud",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 
 # Function to generate word cloud with basic contour
 def generate_better_wordcloud(data, title, mask=None):

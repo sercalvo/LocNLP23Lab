@@ -17,6 +17,14 @@ from textblob import TextBlob
 from textblob.classifiers import NaiveBayesClassifier
 import plotly.graph_objects as go
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Sentiment & Subjectivity",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 # Download necessary NLTK packages and corpora
 nltk.download('punkt')
 nltk.download('stopwords')

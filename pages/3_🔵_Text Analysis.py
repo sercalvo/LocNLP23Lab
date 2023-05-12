@@ -10,6 +10,14 @@ import spacy
 from spacy import displacy
 import io
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Text Analysis",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 # Load the English language model in SpaCy
 nlp = spacy.load("en_core_web_sm")
 

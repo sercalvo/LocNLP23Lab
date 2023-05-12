@@ -12,6 +12,15 @@ from spacy import displacy
 import spacy
 from spacy import displacy
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Dependency & NER",
+    page_icon="img//V-Logo-icon48.png",
+)
+
+
 st.title(":large_brown_circle: Dependency & Entity Analyzer :curly_loop: ")
 st.markdown("Perform real-time analysis of a text to extract features and see a magical visualization of syntactical dependencies and named entities.")
 # Load the English model in Spacy

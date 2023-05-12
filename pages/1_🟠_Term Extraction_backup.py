@@ -16,14 +16,6 @@ import seaborn as sns
 import io
 import time
 
-import os
-from os import path
-
-st.set_page_config(
-    page_title="LocNLP23Lab - Term Extraction",
-    page_icon="img//V-Logo-icon48.png",
-)
-
 st.caption("By **Ser Calvo** :sunglasses: :smile: ")
 with st.expander("ℹ️ - About this app", expanded=False):
 
@@ -46,46 +38,48 @@ st.markdown(f"""
             """)
 
 
-# Add a header
-st.header("Add your text to extract your terminology candidates")
-#st.subheader("Add some text to extract your terminology candidates")
-st.write("This app will do the rest, that is to say, tokenize the text, remove stopwords and identify the most relevant candidates terms.")
+st.header("1. Pick up your text")
 
-# get text input from user
-input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
 
-if input_type == 'Paste text':
-    text = st.text_area('Enter text to analyze')
-elif input_type == 'Select sample data':
-    sample_data = {
-        "Text 1 - Simple sentence": "The quick brown fox jumps over the lazy dog.",
-        "Text 2 - Philosophy": """Jean-Paul Sartre belongs to the existentialists. For him, ultimately humans are "condemned to be free". There is no divine creator and therefore there is no plan for human beings. But what does this mean for love, which is so entwined with ideas of fate and destiny? Love must come from freedom, it must be blissful and mutual and a merging of freedom. But for Sartre, it isn't: love implies conflict. The problem occurs in the seeking of the lover's approval, one wants to be loved, wants the lover to see them as their best possible self. But in doing so one risks transforming into an object under the gaze of the lover, removing subjectivity and the ability to choose, becoming a "loved one". """,
-        "Text 3 - Wind energy": "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy. Wind power has grown rapidly since 2000, driven by R&D, supportive policies and falling costs. Global installed wind generation capacity – both onshore and offshore – has increased by a factor of 98 in the past two decades, jumping from 7.5 GW in 1997 to some 733 GW by 2018 according to IRENA’s data. Onshore wind capacity grew from 178 GW in 2010 to 699 GW in 2020, while offshore wind has grown proportionately more, but from a lower base, from 3.1 GW in 2010 to 34.4 GW in 2020. Production of wind power increased by a factor of 5.2 between 2009 and 2019 to reach 1412 TWh."
-    }
-    selected_sample = st.selectbox('Select sample data', list(sample_data.keys()))
-    text = sample_data[selected_sample]
-else:
-    uploaded_file = st.file_uploader('Upload file', type=['txt'])
-    if uploaded_file is not None:
-        text = uploaded_file.read().decode('utf-8')
-    else:
-        text = ''
+
+#with st.form('upload'):
+file = st.file_uploader("Choose a file", label_visibility="collapsed")
+            
+    #submitted = st.form_submit_button('Enviar')
+
+num_words = 0
+
+if file is not None:
         
+    #bytes_data = file.getvalue()
+    data = file.getvalue().decode('utf-8').splitlines(False)         
+    st.session_state["preview"] = ''
+    for i in range(0, min(5, len(data))):
+        st.session_state["preview"] += data[i]
+    
+    
+    stringio = io.StringIO(file.getvalue().decode("utf-8"))
+    string_data = stringio.read()
+    clean_text = " ".join(string_data.split()) 
+    
+    # Define the regex pattern for splitting the text into words
+    pattern = re.compile(r'\w+')        
+    # Use the findall() method to split the text into a list of words
+    words = pattern.findall(clean_text)
+    # Use the len() function to get the number of words in the list
+    num_words = len(words)  
 
-num_words = count_words(text)
+    if file:
+        placeholder = st.empty()
+        placeholder.success(f" Uploading the file \"{file.name}\" for term extraction.", icon="✅")
+        time.sleep(2)
+        placeholder.empty()
 
-if text:
-    st.subheader('Text to analyze')
-    #st.write(text)
-    st.markdown(f":orange[{text}]")
-
-    # display term extraction
-    st.header("Extract the candidate terms and keywords")  
+    st.header("2. Extract the candidate terms and keywords")  
     df = None
     with st.form('extract'):
-        
       
-        #preview = st.text_area("**Text Preview**", "", height=150, key="preview")
+        preview = st.text_area("**Text Preview**", "", height=150, key="preview")
         st.write(f"""#### The text contains `{num_words}` words. Do you wonder how many terms? 
                  \nLet's try to find some terms and keywords. Magic is one click away... Go for it! :dart: !""")
         
@@ -94,27 +88,37 @@ if text:
             hits = st.number_input(label='Select the maximum number of terms', min_value=10)
         with c2:
             st.write("")
+            #st.write("Magic is one click away... Go for it! :dart: !")
+            #hits = st.slider(label='Select the maximum number of terms', min_value=0, max_value=100, key=4)
+            ##st.write(f"There will be `{hits}` term candidates on screen in a few seconds.")
+            
+        # To convert to a string based IO:
+        stringio = io.StringIO(file.getvalue().decode("utf-8"))
+        #st.write(stringio)
+    
+        # To read file as string:
+        string_data = stringio.read()
+        clean_text = " ".join(string_data.split()) 
         
-        
-        submit_extract = st.form_submit_button('Extract terms')
+        file_extract = st.form_submit_button('Extract keywords')
     
         
-        if submit_extract:
+        if file_extract:
             
-            #if text:
-             #   placeholder = st.empty()
-              #  placeholder.success(" Just a few miliseconds...", icon="⏳")
-               # time.sleep(1)
-                #placeholder.empty()
+            if file:
+                placeholder = st.empty()
+                placeholder.success(" Just a few miliseconds...", icon="⏳")
+                time.sleep(1)
+                placeholder.empty()
             
            # with st.container():
               
                 
             #hits = 10
-            keywords = verikeybert(text, hits)
-            st.subheader("Terminology extraction results\n")    
+            keywords = verikeybert(clean_text, hits)
+            st.subheader("Keyword extraction results\n")    
             
-            st.write("##### Please see a list of ", len(keywords)," candidate terms and keywords.")
+            st.write("##### Please see the top ", len(keywords)," keywords.")
             
             df = (
             DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])

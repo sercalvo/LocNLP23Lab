@@ -16,6 +16,14 @@ from pandas import DataFrame
 import time
 from vfunctions import verikeybert
 
+import os
+from os import path
+
+st.set_page_config(
+    page_title="LocNLP23Lab - Term Annotation",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 
 def annotate_keyphrases(text, phrases):
     # Load the English language model from spaCy
