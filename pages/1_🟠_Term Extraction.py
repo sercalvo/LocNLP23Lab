@@ -148,7 +148,7 @@ if text:
     
             
     if df is not None:
-        st.header("3. Save the keywords!")
+        st.header("3. Save the terms!")
         df = (
         DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])
         .sort_values(by="Relevancy", ascending=False)
