@@ -16,6 +16,14 @@ import matplotlib.pyplot as plt
 import altair as alt
 import nltk
 from collections import Counter
+from nltk.corpus import wordnet as wn
+from nltk.stem import WordNetLemmatizer
+import requests
+from bs4 import BeautifulSoup
+
+
+# Create a WordNet lemmatizer
+lemmatizer = WordNetLemmatizer()
 
 # Download necessary NLTK packages and corpora
 nltk.download('punkt')
@@ -488,6 +496,87 @@ def show_visualizations_7(df):
     with tab2:
         # Use the native Plotly theme.
         st.plotly_chart(fig, theme=None, use_container_width=True)
+        
+        
+        
+        
+# Create a WordNet Lemmatizer
+lemmatizer = WordNetLemmatizer()
+
+
+# Define a function to display the dataframe in the app
+@st.cache_data
+def get_term_definitions(df):
+    st.title("Terminology definitions")
+    
+    # Create the initial dataframe
+    #df = pd.DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])
+
+    # Create two columns for layout
+    col1, col2 = st.columns(2)
+
+    # Display the dataframe in the first column
+    col1.dataframe(df)
+    #col2.table(df.format(format_dictionary).data)
+    
+
+    # Select terms using multiselect in the second column
+    selected_terms = col2.multiselect(
+        "Select Terms to Generate Definitions For",
+        options=list(df["Keyword/Keyphrase"]),
+    )
+    
+    if st.button("Generate Definitions"):
+        st.subheader("Definitions")
+
+        # Check if any terms are selected
+        if len(selected_terms) > 0:
+            # Create a new dataframe for definitions
+            definitions_df = pd.DataFrame(selected_terms, columns=["Term"])
+
+            # Add columns for WordNet and Merriam-Webster definitions
+            definitions_df["Merriam-Webster Definition"] = definitions_df["Term"].apply(get_merriam_webster_definition)
+            definitions_df["WordNet Definition"] = definitions_df["Term"].apply(get_wordnet_definition)
+
+            # Display the definitions dataframe
+            st.dataframe(definitions_df)
+        else:
+            st.write("No terms selected.")
+
+
+# Function to retrieve the definition and source reference of a term using WordNet
+def get_wordnet_definition(term):
+    definitions = []
+    for token in term.split():
+        lemma = lemmatizer.lemmatize(token)
+        synsets = wn.synsets(lemma)
+        if synsets:
+            definitions.append(synsets[0].definition())
+    if definitions:
+        definition = ', '.join(definitions)
+        source = "WordNet"
+        return f"{definition} ({source})"
+    else:
+        return "Definition not found"
+
+# Function to retrieve the definition of a term from Merriam-Webster
+def get_merriam_webster_definition(term):
+    url = f"https://www.merriam-webster.com/dictionary/{term}"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    definition = soup.find(class_="dtText")
+    if definition:
+        return definition.text.strip()
+    else:
+        return "Definition not found"
+    
+# Function to retrieve the part of speech (POS) of a term using spaCy
+def get_pos(term):
+    doc = nlp(term)
+    if doc and len(doc) > 0:
+        return doc[0].pos_
+    else:
+        return "POS not found"
 
 
 
