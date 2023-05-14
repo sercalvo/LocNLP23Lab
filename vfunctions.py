@@ -580,6 +580,14 @@ def get_pos(term):
     else:
         return "POS not found"
 
+# Function to retrieve the lemma of a term using spaCy
+def get_lemma(term):
+    doc = nlp(term)
+    if doc and len(doc) > 0:
+        return doc[0].lemma_
+    else:
+        return "Lemma not found"
+
 
 
 

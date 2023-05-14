@@ -47,10 +47,33 @@ taxonomy = {
 
 # Create a Streamlit app
 st.title(':large_purple_circle: Sentiment Analysis and Subjectivity :zipper_mouth_face:')
+st.markdown('This app makes use of `Streamlit`, `NLTK`, `sumy`, `textblob` and `plotly` libraries to provide a rough analysis on polarity and subjectivity.')
 
-# Create a text input box for the user
-text = st.text_area('Enter your text here')
+# Add a header for the first section: Select text
+st.header("Add your text to analyze")
+# get text input from user
+input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
+if input_type == 'Paste text':
+    text = st.text_area('Enter text to analyze')
+elif input_type == 'Select sample data':
+    sample_data = {
+        "Sample text 1": "The quick brown fox jumps over the lazy dog.",
+        "Sample text 2": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
+        "Sample text 3": "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy."
+    }
+    selected_sample = st.selectbox('Select sample data', list(sample_data.keys()))
+    text = sample_data[selected_sample]
+else:
+    uploaded_file = st.file_uploader('Upload file', type=['txt'])
+    if uploaded_file is not None:
+        text = uploaded_file.read().decode('utf-8')
+    else:
+        text = ''
+
 if text:
+    st.subheader('Text to analyze')
+    st.markdown(f":green[{text}]")
+
     # Tokenize the text into sentences and words
     sentences = sent_tokenize(text)
     words = word_tokenize(text)
@@ -90,27 +113,31 @@ if text:
     category = classifier.classify(text)
     
     # Display the results to the user
-    st.header('Text Summary')
-    st.write(summary_str)
+    st.header('Analysis results')
     
-    st.header('Text Analysis')
+    st.subheader('Text Analysis')
     if polarity > 0:
-        st.subheader(f'**Polarity:** :green[{polarity}]')
+        st.markdown(f'**Polarity: :green[{polarity}]**')
     elif polarity < 0:
-        st.subheader(f'**Polarity:** :orange[{polarity}]')
+        st.markdown(f'**Polarity: :orange[{polarity}]**')
     else:
-        st.subheader(f'**Polarity:** {polarity}')
+        st.markdown(f'**Polarity: {polarity}**')
     st.caption("**Polarity refers to the sentiment expressed in the text**. A positive polarity indicates a positive sentiment, while a negative polarity indicates a negative sentiment. A polarity of 0 indicates a neutral sentiment.")
     if subjectivity > 0:
-        st.subheader(f'**Subjectivity:** :green[{subjectivity}]')
+        st.markdown(f'**Subjectivity: :green[{subjectivity}]**')
     elif subjectivity < 0:
-        st.subheader(f'**Subjectivity:** :orange[{subjectivity}]')
+        st.markdown(f'**Subjectivity: :orange[{subjectivity}]**')
     else:
-        st.subheader(f'**Subjectivity:** {subjectivity}')
+        st.markdown(f'**Subjectivity: {subjectivity}**')
 
     st.caption("**Subjectivity refers to how subjective or objective the text is**. A high subjectivity score indicates that the text is subjective and contains personal opinions, while a low subjectivity score indicates that the text is objective and presents factual information.")
     
-    st.header("How polarity and subjectivity is mirrored by POS categories")
+    st.subheader('Text Categorization')
+    st.write(f'**Category:** {category}')
+    st.subheader('Text Summary')
+    st.write(summary_str)
+
+    st.header("How polarity and subjectivity are represented by POS categories")
     col1, col2 = st.columns([1, 3])
     with col1:
         st.subheader(f'Nouns: :green[{noun_count}]')
@@ -123,8 +150,7 @@ if text:
                                      hole=.3)])
         st.plotly_chart(fig, theme="streamlit", use_container_width=True)
     
-    st.subheader('Text Categorization')
-    st.write(f'Category: {category}')
+
 
 
 

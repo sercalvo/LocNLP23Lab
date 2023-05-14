@@ -39,10 +39,12 @@ def show_term_extraction_results(text, hits):
     
     if add_POS:
         df.insert(1, "POS", df['Keyword/Keyphrase'].apply(get_pos))
+    if add_lemma:
+        df.insert(2, "lemma", df['Keyword/Keyphrase'].apply(get_lemma))
     if add_definition:
         # Add columns for WordNet and Merriam-Webster definitions
-        df.insert(1, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
-        df.insert(2, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
+        df.insert(3, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
+        df.insert(3, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
         
     
     
@@ -67,7 +69,7 @@ def show_term_extraction_results(text, hits):
     st.balloons()
     
     if df is not None:
-        st.header("Save the terms!")
+        st.header("Save the terms")
         
         @st.cache_data
         def convert_df(df):
@@ -83,8 +85,6 @@ def show_term_extraction_results(text, hits):
             mime='text/csv',
         )
     
-        st.markdown("**Thanks for using this tool!**")  
-
         return styled_df, df
     
 def get_term_definitions():
@@ -180,14 +180,15 @@ if text:
         c1, c2 = st.columns(2)
         with c1:
             hits = st.number_input(label='Select the maximum number of terms', min_value=10)
+            submit_extract = st.form_submit_button('Extract terms')
         with c2:
             st.caption("**Add metadata fields**")
             # Use st.checkbox() to create checkboxes for enabling stop word removal and lemmatization
-            add_POS = st.checkbox(":orange[Add POS tags]", help="It will add the Part Of Speech to each term.")
-            add_definition = st.checkbox(":orange[Add definition]", help="It will add Merriam-Webster and WordNet definitions to each term.")
+            add_POS = st.checkbox(":green[Add POS tags]", help="It will add the Part Of Speech to each term.")
+            add_lemma = st.checkbox(":green[Add lemma]", help="It will add the lemma or cannonical form of the word.")
+            add_definition = st.checkbox(":green[Add definition]", help="It will add Merriam-Webster and WordNet definitions to each term.")
         
         
-        submit_extract = st.form_submit_button('Extract terms')
     
     
     if submit_extract:
