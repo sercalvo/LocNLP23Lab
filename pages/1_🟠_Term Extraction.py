@@ -19,6 +19,93 @@ import time
 import os
 from os import path
 
+# Define the global DataFrame variable
+df = None
+
+
+def show_term_extraction_results(text, hits):
+    global df  # Use the global DataFrame variable
+    
+    keywords = verikeybert(text, hits)
+    st.subheader("Terminology extraction results\n")    
+    
+    st.write("##### Please see a list of ", len(keywords)," candidate terms and keywords.")
+    
+    df = (
+        DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])
+        .sort_values(by="Relevancy", ascending=False)
+        .reset_index(drop=True)
+    )
+    
+    if add_POS:
+        df.insert(1, "POS", df['Keyword/Keyphrase'].apply(get_pos))
+    if add_definition:
+        # Add columns for WordNet and Merriam-Webster definitions
+        df.insert(1, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
+        df.insert(2, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
+        
+    
+    
+    # Add styling
+    cmGreen = sns.light_palette("green", as_cmap=True)
+    styled_df = df.style.background_gradient(
+        cmap=cmGreen,
+        subset=[
+            "Relevancy",
+        ],
+    )
+    
+    c1, c2, c3 = st.columns([1, 3, 1])
+    
+    format_dictionary = {
+        "Relevancy": "{:.1%}",
+    }
+    
+    styled_df = styled_df.format(format_dictionary)
+    
+    st.table(styled_df)
+    st.balloons()
+    
+    if df is not None:
+        st.header("Save the terms!")
+        
+        @st.cache_data
+        def convert_df(df):
+            # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return df.to_csv().encode('utf-8')
+        
+        csv = convert_df(df)
+    
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            file_name='Extracted_keywords.csv',
+            mime='text/csv',
+        )
+    
+        st.markdown("**Thanks for using this tool!**")  
+
+        return styled_df, df
+    
+def get_term_definitions():
+    global df  # Use the global DataFrame variable
+    
+    st.header("Generate definitions")
+    selected_terms = st.multiselect(
+        "Select terms to generate definitions for",
+        df["Keyword/Keyphrase"].tolist(),
+        default=st.session_state.get("selected_terms", [])
+    )
+    st.session_state["selected_terms"] = selected_terms
+    
+    if selected_terms:
+        definitions = get_term_definitions(selected_terms)
+        if definitions:
+            st.table(definitions)
+        else:
+            st.write("No definitions found for the selected terms.")
+
+
 st.set_page_config(
     page_title="LocNLP23Lab - Term Extraction",
     page_icon="img//V-Logo-icon48.png",
@@ -58,9 +145,9 @@ if input_type == 'Paste text':
     text = st.text_area('Enter text to analyze')
 elif input_type == 'Select sample data':
     sample_data = {
-        "Text 1 - Simple sentence": "The quick brown fox jumps over the lazy dog.",
-        "Text 2 - Philosophy": """Jean-Paul Sartre belongs to the existentialists. For him, ultimately humans are "condemned to be free". There is no divine creator and therefore there is no plan for human beings. But what does this mean for love, which is so entwined with ideas of fate and destiny? Love must come from freedom, it must be blissful and mutual and a merging of freedom. But for Sartre, it isn't: love implies conflict. The problem occurs in the seeking of the lover's approval, one wants to be loved, wants the lover to see them as their best possible self. But in doing so one risks transforming into an object under the gaze of the lover, removing subjectivity and the ability to choose, becoming a "loved one". """,
-        "Text 3 - Wind energy": "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy. Wind power has grown rapidly since 2000, driven by R&D, supportive policies and falling costs. Global installed wind generation capacity – both onshore and offshore – has increased by a factor of 98 in the past two decades, jumping from 7.5 GW in 1997 to some 733 GW by 2018 according to IRENA’s data. Onshore wind capacity grew from 178 GW in 2010 to 699 GW in 2020, while offshore wind has grown proportionately more, but from a lower base, from 3.1 GW in 2010 to 34.4 GW in 2020. Production of wind power increased by a factor of 5.2 between 2009 and 2019 to reach 1412 TWh."
+        "Sample text 1 - Simple sentence": "The quick brown fox jumps over the lazy dog.",
+        "Sample text 2 - Philosophy": """Jean-Paul Sartre belongs to the existentialists. For him, ultimately humans are "condemned to be free". There is no divine creator and therefore there is no plan for human beings. But what does this mean for love, which is so entwined with ideas of fate and destiny? Love must come from freedom, it must be blissful and mutual and a merging of freedom. But for Sartre, it isn't: love implies conflict. The problem occurs in the seeking of the lover's approval, one wants to be loved, wants the lover to see them as their best possible self. But in doing so one risks transforming into an object under the gaze of the lover, removing subjectivity and the ability to choose, becoming a "loved one". """,
+        "Sample text 3 - Wind energy": "Wind is used to produce electricity by converting the kinetic energy of air in motion into electricity. In modern wind turbines, wind rotates the rotor blades, which convert kinetic energy into rotational energy. This rotational energy is transferred by a shaft which to the generator, thereby producing electrical energy. Wind power has grown rapidly since 2000, driven by R&D, supportive policies and falling costs. Global installed wind generation capacity – both onshore and offshore – has increased by a factor of 98 in the past two decades, jumping from 7.5 GW in 1997 to some 733 GW by 2018 according to IRENA’s data. Onshore wind capacity grew from 178 GW in 2010 to 699 GW in 2020, while offshore wind has grown proportionately more, but from a lower base, from 3.1 GW in 2010 to 34.4 GW in 2020. Production of wind power increased by a factor of 5.2 between 2009 and 2019 to reach 1412 TWh."
     }
     selected_sample = st.selectbox('Select sample data', list(sample_data.keys()))
     text = sample_data[selected_sample]
@@ -77,11 +164,11 @@ num_words = count_words(text)
 if text:
     st.subheader('Text to analyze')
     #st.write(text)
-    st.markdown(f":orange[{text}]")
+    st.markdown(f":green[{text}]")
 
     # display term extraction
     st.header("Extract the candidate terms and keywords")  
-    df = None
+
     with st.form('extract'):
         
       
@@ -93,86 +180,23 @@ if text:
         with c1:
             hits = st.number_input(label='Select the maximum number of terms', min_value=10)
         with c2:
-            st.write("")
+            st.caption("**Add metadata fields**")
+            # Use st.checkbox() to create checkboxes for enabling stop word removal and lemmatization
+            add_POS = st.checkbox(":orange[Add POS tags]", help="It will add the Part Of Speech to each term.")
+            add_definition = st.checkbox(":orange[Add definition]", help="It will add Merriam-Webster and WordNet definitions to each term.")
         
         
         submit_extract = st.form_submit_button('Extract terms')
     
-        
-        if submit_extract:
-            
-            #if text:
-             #   placeholder = st.empty()
-              #  placeholder.success(" Just a few miliseconds...", icon="⏳")
-               # time.sleep(1)
-                #placeholder.empty()
-            
-           # with st.container():
-              
-                
-            #hits = 10
-            keywords = verikeybert(text, hits)
-            st.subheader("Terminology extraction results\n")    
-            
-            st.write("##### Please see a list of ", len(keywords)," candidate terms and keywords.")
-            
-            df = (
-            DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])
-            .sort_values(by="Relevancy", ascending=False)
-            .reset_index(drop=True)
-            )
-            
-            df.index += 1
-            
-            # Add styling
-            cmGreen = sns.light_palette("green", as_cmap=True)
-            cmRed = sns.light_palette("red", as_cmap=True)
-            df = df.style.background_gradient(
-                cmap=cmGreen,
-                subset=[
-                    "Relevancy",
-                ],
-            )
-            
-            c1, c2, c3 = st.columns([1, 3, 1])
-            
-            format_dictionary = {
-                "Relevancy": "{:.1%}",
-            }
-            
-            df = df.format(format_dictionary)
-            
-            st.table(df)
-            st.balloons()
-            
     
+    if submit_extract:
+        styled_df, df = show_term_extraction_results(text, hits)
+        st.session_state['df'] = df
+
+    
+        
             
-    if df is not None:
-        st.header("Save the terms!")
-        df = (
-        DataFrame(keywords, columns=["Keyword/Keyphrase", "Relevancy"])
-        .sort_values(by="Relevancy", ascending=False)
-        .reset_index(drop=True)
-        )
-        
-        
-        
-        @st.cache_data
-        def convert_df(df):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return df.to_csv().encode('utf-8')
-        
-        csv = convert_df(df)
-    
-    
-        st.download_button(
-                label="Download data as CSV",
-            data=csv,
-            file_name='Extracted_keywords.csv',
-            mime='text/csv',
-        )
-    
-        st.markdown("**Thanks for using this tool!**")                            
+                              
             
                     
         
