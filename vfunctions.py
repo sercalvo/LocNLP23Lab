@@ -29,6 +29,8 @@ lemmatizer = WordNetLemmatizer()
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
 
 @st.cache_data
 def verikeybert(text, hits):
