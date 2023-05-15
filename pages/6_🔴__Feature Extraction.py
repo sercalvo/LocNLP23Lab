@@ -88,7 +88,7 @@ if st.button("Extract information from text"):
     email_list = re.findall(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b', text) or []
 
     # Display the results
-    st.header("Informatio extraction results")
+    st.header("Information extraction results")
     if names_list:
         st.markdown("**:orange[Person Names:]**")
         for name in names_list:
