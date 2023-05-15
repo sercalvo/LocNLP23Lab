@@ -180,7 +180,7 @@ if text:
                 mask = np.array(Image.open(path.join(d, png))) 
                 wordcloud = WordCloud(
                     scale=3,
-                    max_words=150,
+                    max_words=120,
                     #width = 3000, 
                     #height = 2000, 
                     #random_state=1, 
