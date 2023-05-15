@@ -34,7 +34,7 @@ st.markdown(
     \nYou will find some kind of magic, but it's a matter of believing or not. I do believe in the magic of computational linguistics and natural language processing.
     \nI'm sharing a few examples of how using Python and some available libraries and resources, a few things can be done. 
     I have built this app using `Streamlit`, an open-source app framework built specifically for
-    Machine Learning and Data Science projects. Behind, there's a full range of libraries and Python code, of course. I am not an expert, but do take advantage of libraries like `Spacy`, `NLTK`, `Transformers`, `Pandas`, `scikit-learn`, `Beautiful Soup`, `TextBlob`, `Gensim`, `PyTorch` and other libraries.
+    Machine Learning and Data Science projects. Behind, there's a full range of libraries and Python code, of course. I am not an expert, but do take advantage of libraries like `Spacy`, `NLTK`, `Transformers`, `Pandas`, `scikit-learn`, `Beautiful Soup`, `TextBlob`, `Gensim`, `PyTorch` and many others!
     \nThe goal? Unveil the secrets of languages, no matter if they are meant for humans or computers.
     \nEnjoy the ride! 	:bike:
     \n:smiley: Sergio Calvo
