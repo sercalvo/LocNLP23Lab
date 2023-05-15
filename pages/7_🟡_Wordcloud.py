@@ -71,7 +71,7 @@ st.write("This app will do the rest, that is to say, tokenize the text, remove s
 input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
 
 if input_type == 'Paste text':
-    text = st.text_area('Enter text to analyze')
+    text = st.text_area('Enter text to analyze', max_chars=6000)
 elif input_type == 'Select sample data':
     sample_data = {
         "Sample text 1 - Simple sentence": "The quick brown fox jumps over the lazy dog.",
@@ -104,7 +104,9 @@ if not text:
 if text:
     st.subheader('Text to save in a cloud')
     #st.write(text)
-    st.markdown(f":green[{text}]")
+    #st.code(f":green[{text}]")
+    #st.markdown("```" + text[:500] + "```", unsafe_allow_html=True)
+    st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{text}</div>', unsafe_allow_html=True)
 
 # Upload a file
 #file = st.file_uploader("Choose a file", label_visibility="collapsed")
