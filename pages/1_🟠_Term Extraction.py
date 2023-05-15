@@ -15,12 +15,34 @@ import re
 import seaborn as sns
 import io
 import time
-
 import os
 from os import path
+import random
+import re
 
 # Define the global DataFrame variable
 df = None
+
+def get_random_context(keyword, text):
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    keyword_sentences = [sentence for sentence in sentences if keyword.lower() in sentence.lower()]
+    
+    if len(keyword_sentences) >= 2:
+        first_sentence = random.choice(keyword_sentences)
+        remaining_sentences = [sentence for sentence in keyword_sentences if sentence != first_sentence]
+        second_sentence = random.choice(remaining_sentences) if remaining_sentences else "No other sentence"
+    elif len(keyword_sentences) == 1:
+        first_sentence = keyword_sentences[0]
+        second_sentence = "No other sentence"
+    else:
+        first_sentence = "No other sentence"
+        second_sentence = "No other sentence"
+    
+    return first_sentence, second_sentence
+
+
+
+
 
 
 def show_term_extraction_results(text, hits):
@@ -38,13 +60,23 @@ def show_term_extraction_results(text, hits):
     )
     
     if add_POS:
-        df.insert(1, "POS", df['Keyword/Keyphrase'].apply(get_pos))
+        df.insert(1, "POS", df["Keyword/Keyphrase"].apply(lambda x: " ".join(get_pos(word) for word in x.split())))
+
     if add_lemma:
-        df.insert(2, "lemma", df['Keyword/Keyphrase'].apply(get_lemma))
+        #df.insert(2, "lemma", df['Keyword/Keyphrase'].apply(get_lemma))
+        df.insert(2, "lemma", df["Keyword/Keyphrase"].apply(lambda x: " ".join(get_lemma(word) for word in x.split())))
     if add_definition:
         # Add columns for WordNet and Merriam-Webster definitions
-        df.insert(3, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
-        df.insert(3, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
+        df.insert(3, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
+        df.insert(4, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
+    if add_context:
+        df.insert(5, "Context Sentence 1", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[0]))
+        df.insert(6, "Context Sentence 2", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[1]))
+        
+    # Adjust the index to start at 1
+    df.index += 1
+
+
         
     
     
@@ -187,6 +219,8 @@ if text:
             add_POS = st.checkbox(":green[Add POS tags]", help="It will add the Part Of Speech to each term.")
             add_lemma = st.checkbox(":green[Add lemma]", help="It will add the lemma or cannonical form of the word.")
             add_definition = st.checkbox(":green[Add definition]", help="It will add Merriam-Webster and WordNet definitions to each term.")
+            add_context = st.checkbox(":green[Add context sentences]", help="It will add random context sentences to each term.")
+
         
         
     

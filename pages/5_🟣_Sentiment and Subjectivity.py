@@ -117,16 +117,22 @@ if text:
     
     st.subheader('Text Analysis')
     if polarity > 0:
-        st.markdown(f'**Polarity: :green[{polarity}]**')
+        st.markdown(f'**Polarity: :green[{polarity} - Positive sentiment]**')
     elif polarity < 0:
-        st.markdown(f'**Polarity: :orange[{polarity}]**')
+        st.markdown(f'**Polarity: :red[{polarity} - Negative sentiment]**')
+    elif subjectivity == 0:
+        st.markdown(f'**Polarity: {polarity} - Neutral**')
     else:
         st.markdown(f'**Polarity: {polarity}**')
     st.caption("**Polarity refers to the sentiment expressed in the text**. A positive polarity indicates a positive sentiment, while a negative polarity indicates a negative sentiment. A polarity of 0 indicates a neutral sentiment.")
-    if subjectivity > 0:
-        st.markdown(f'**Subjectivity: :green[{subjectivity}]**')
-    elif subjectivity < 0:
-        st.markdown(f'**Subjectivity: :orange[{subjectivity}]**')
+    
+    if subjectivity > 0.5:
+        st.markdown(f'**Subjectivity: :red[{subjectivity} - Highly subjective]**')
+    elif 0.01 <= subjectivity <=  0.5:
+        st.markdown(f'**Subjectivity: :orange[{subjectivity} - Moderately subjective]**')
+    elif subjectivity == 0.0:
+        st.markdown(f'**Subjectivity: {subjectivity} - Neutral**')
+        
     else:
         st.markdown(f'**Subjectivity: {subjectivity}**')
 
