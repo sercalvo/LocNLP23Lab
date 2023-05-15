@@ -10,6 +10,11 @@ import spacy
 import re
 import io
 
+st.set_page_config(
+    page_title="LocNLP23Lab - Sentiment & Subjectivity",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 # Load the 'en_core_web_sm' model
 nlp = spacy.load('en_core_web_sm')
 
