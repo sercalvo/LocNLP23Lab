@@ -166,7 +166,7 @@ if text:
         if pos_tags:
             st.write(', '.join(pos_tags))
         else:
-            st.info('No parts of speech found in the text.')
+            st.info('Please select a POS type to highlight in the text.')
         
         st.divider()
      
