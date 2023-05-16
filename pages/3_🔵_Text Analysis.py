@@ -47,9 +47,31 @@ def main():
         text = st.text_area("Paste your text here", "")
     elif option == "Use sample text":
         sample_data = {
-            "Sample text 1": "The quick brown fox jumps over the lazy dog.",
-            "Sample text 2": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
-            "Sample text 3": "San Francisco has reversed its decision to authorise police to use robots equipped with lethal weapons.The proposal, which was passed last week by the city's legislators, the board of supervisors, would have allowed police to access robots that can kill. It had faced fierce criticism from civil liberties groups. After voting unanimously to pause the proposal on Tuesday, the board sent the issue to committee for further review. The measure would have allowed the San Francisco Police Department (SFPD) to kill suspects with robots in extreme situations. The vote came following a new California law requiring city police forces to keep inventories of military-grade equipment and seek approval for their use. Dr Catherine Connolly, from the group Stop Killer Robots, told the BBC the move was a 'slippery slope' that could distance humans from killing. Protesters and several dissenting board members gathered on the steps of city hall to call for the city to reverse its decision. In a secondary vote, usually reserved to rubber-stamp board decisions, they decided to overturn their vote. The original proposal will now be refined or entirely scrapped. Police have argued that the robots would only be used in extreme circumstances. A spokesperson for SFPD said 'robots could potentially be equipped with explosive charges to breach fortified structures containing violent, armed, or dangerous subjects'. They also said robots could be used to 'incapacitate, or disorient violent, armed, or dangerous suspects who pose a risk of loss of life'. This type of lethal robot is already in use in other parts of the US. In 2016, police in Dallas, Texas, used a robot armed with C-4 explosive to kill a sniper who had killed five officers and injured several more.",
+            "Sample 1 - Chuck Norris": "If an EMP were to go off within a close proximity of Chuck Norris, he would be rendered useless for a short period of time, because over 500 years ago, he traded the ability to see the future to Nostradamus for cybernetic arms, legs, and heart.",
+            "Sample 2 - The fox": "The quick brown fox jumps over the lazy dog.",
+            "Sample 3 - Huckleberry Fin": """I felt good and all washed clean of sin for the first time I had ever felt so in my life, and I knowed I could pray now. But I didn't do it straight off, but laid the paper down and set there thinking--thinking how good it was all this happened so, and how near I come to being lost and going to hell. And went on thinking. And got to thinking over our trip down the river; and I see Jim before me all the time: in the day and in the night-time, sometimes moonlight, sometimes storms, and we a-floating along, talking and singing and laughing. But somehow I couldn't seem to strike no places to harden me against him, but only the other kind. I'd see him standing my watch on top of his'n, 'stead of calling me, so I could go on sleeping; and see him how glad he was when I come back out of the fog; and when I come to him again in the swamp, up there where the feud was; and such-like times; and would always call me honey, and pet me and do everything he could think of for me, and how good he always was; and at last I struck the time I saved him by telling the men we had small-pox aboard, and he was so grateful, and said I was the best friend old Jim ever had in the world, and the ONLY one he's got now; and then I happened to look around and see that paper.
+                        It was a close place. I took it up, and held it in my hand. I was a-trembling, because I'd got to decide, forever, betwixt two things, and I knowed it. I studied a minute, sort of holding my breath, and then says to myself: All right, then, I'll GO to hell --and tore it up. 
+                        Mark Twain, The Adventures of Huckleberry Finn""",
+            "Sample 4 - Shakespeare": """
+                                    Shall I compare thee to a summer’s day?
+                                    Thou art more lovely and more temperate:
+                                    Rough winds do shake the darling buds of May,
+                                    And summer’s lease hath all too short a date;
+                                    Sometime too hot the eye of heaven shines,
+                                    And often is his gold complexion dimm'd;
+                                    And every fair from fair sometime declines,
+                                    By chance or nature’s changing course untrimm'd;
+                                    But thy eternal summer shall not fade,
+                                    Nor lose possession of that fair thou ow’st;
+                                    Nor shall death brag thou wander’st in his shade,
+                                    When in eternal lines to time thou grow’st:
+                                       So long as men can breathe or eyes can see,
+                                       So long lives this, and this gives life to thee.
+                                       Sonnet 18: Shall I compare thee to a summer’s day?
+                                       BY WILLIAM SHAKESPEARE
+                                       """,
+            "Sample 5 - San Francisco": "San Francisco has reversed its decision to authorise police to use robots equipped with lethal weapons.The proposal, which was passed last week by the city's legislators, the board of supervisors, would have allowed police to access robots that can kill. It had faced fierce criticism from civil liberties groups. After voting unanimously to pause the proposal on Tuesday, the board sent the issue to committee for further review. The measure would have allowed the San Francisco Police Department (SFPD) to kill suspects with robots in extreme situations. The vote came following a new California law requiring city police forces to keep inventories of military-grade equipment and seek approval for their use. Dr Catherine Connolly, from the group Stop Killer Robots, told the BBC the move was a 'slippery slope' that could distance humans from killing. Protesters and several dissenting board members gathered on the steps of city hall to call for the city to reverse its decision. In a secondary vote, usually reserved to rubber-stamp board decisions, they decided to overturn their vote. The original proposal will now be refined or entirely scrapped. Police have argued that the robots would only be used in extreme circumstances. A spokesperson for SFPD said 'robots could potentially be equipped with explosive charges to breach fortified structures containing violent, armed, or dangerous subjects'. They also said robots could be used to 'incapacitate, or disorient violent, armed, or dangerous suspects who pose a risk of loss of life'. This type of lethal robot is already in use in other parts of the US. In 2016, police in Dallas, Texas, used a robot armed with C-4 explosive to kill a sniper who had killed five officers and injured several more.",
+  
             }
         selected_sample = st.selectbox('Select sample data', list(sample_data.keys()))
         text = sample_data[selected_sample]
@@ -71,11 +93,9 @@ def main():
     if text != "":
             
         # Display the selected text
-        st.subheader("Text to analyze")
-        #st.write(string_data)
-        st.markdown(f":green[{text}]")
-        ##st.info(f":blue[{text}]")
-        #st.success(text)
+        words = text.split()[:1000]
+        limited_text = ' '.join(words)
+        st.markdown(f'<div style="height: 200px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
     
         
         # Process the text
@@ -216,7 +236,7 @@ def analyze_text(text, nlp):
 
     #show_visualizations_4(df)
     #show_visualizations_5(create_linguistic_df(text))
-    #show_visualizations_6(create_linguistic_df(text))
+    show_visualizations_6(create_linguistic_df(text))
     #show_visualizations_7(calculate_tfidf(text))
     #create_linguistic_df(text)
     
