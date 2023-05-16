@@ -33,10 +33,10 @@ def get_random_context(keyword, text):
         second_sentence = random.choice(remaining_sentences) if remaining_sentences else "No other sentence"
     elif len(keyword_sentences) == 1:
         first_sentence = keyword_sentences[0]
-        second_sentence = "No other sentence"
+        second_sentence = "No other sentences found"
     else:
-        first_sentence = "No other sentence"
-        second_sentence = "No other sentence"
+        first_sentence = "No other sentences found"
+        second_sentence = "No other sentences found"
     
     return first_sentence, second_sentence
 
@@ -197,7 +197,15 @@ num_words = count_words(text)
 if text:
     st.subheader('Text to analyze')
     #st.write(text)
-    st.markdown(f":green[{text}]")
+    #st.markdown(f":green[{text}]")
+    # En verde
+    ###st.markdown(f":green[{text}]") # En verde
+    # Todas las palabras
+    ###st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{text}</div>', unsafe_allow_html=True) # Todas las palabras
+    # Solo 1000 palabras para mostrar
+    words = text.split()[:1000]
+    limited_text = ' '.join(words)
+    st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
 
     # display term extraction
     st.header("Extract the candidate terms and keywords")  

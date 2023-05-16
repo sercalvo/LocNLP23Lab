@@ -140,7 +140,14 @@ if not text:
 if text:
     st.subheader('Text to save in a cloud')
     #st.write(text)
-    st.markdown(f":green[{text}]")
+    # En verde
+    ###st.markdown(f":green[{text}]") # En verde
+    # Todas las palabras
+    ###st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{text}</div>', unsafe_allow_html=True) # Todas las palabras
+    # Solo 1000 palabras para mostrar
+    words = text.split()[:1000]
+    limited_text = ' '.join(words)
+    st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
 
 # Upload a file
 #file = st.file_uploader("Choose a file", label_visibility="collapsed")
