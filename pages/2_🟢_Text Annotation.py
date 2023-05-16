@@ -27,13 +27,13 @@ def generate_annotated_text(text, pos_options, pos_select):
 
 # Add a page title for the app
 st.title(':large_green_circle: Text Annotation :female-detective:')
-st.markdown('This app uses `Spacy` and `st-annotated-text` libraries to visualize words per part of speech.')
+st.markdown('This app uses `Spacy`, `st-annotated-text`, `random` and `re` libraries to visualize words per part of speech.')
 
 # Add a header for the first section: Select text
 st.header("Add your text to analyze and annotate")
 
 # get text input from user
-input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
+input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
 
 if input_type == 'Paste text':
     text = st.text_area('Enter text to analyze')
@@ -232,13 +232,13 @@ if text:
             if ner_entities:
                 st.write(', '.join(ner_entities))
             else:
-                st.info('No named entities found in the text.')
+                st.info('Please select a NER type to highlight in the text.')
         
         st.divider()
     
     
         # Add a footer for the app
-        st.markdown('**Note:** This is a basic text annotation app using `Spacy` and `st-annotated-text` libraries.')
+        st.markdown('**Note:** This is a basic text annotation app using `Spacy`, `st-annotated-text`, `random` and `re` libraries.')
     
 
 

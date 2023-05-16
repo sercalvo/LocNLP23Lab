@@ -110,7 +110,7 @@ stop_words.update(modal_verbs)
 
 
 # get text input from user
-input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
+input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
 
 if input_type == 'Paste text':
     text = st.text_area('Enter text to analyze')

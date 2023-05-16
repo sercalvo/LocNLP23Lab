@@ -171,7 +171,7 @@ st.header("Add your text to extract term candidates")
 st.write("This app will do the rest, that is to say, tokenize the text, remove stopwords and identify the most relevant candidates terms.")
 
 # get text input from user
-input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="It will add the Part Of Speech to each term.")
+input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
 
 if input_type == 'Paste text':
     text = st.text_area('Enter text to analyze')

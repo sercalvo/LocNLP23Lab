@@ -42,7 +42,7 @@ def main():
     st.header("Add a text for analysis")
     
     # Allow the user to paste a text, use the example text, or upload a file
-    option = st.radio("Select an option:", ("Paste text", "Use sample text", "Upload file"))
+    option = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
     if option == "Paste text":
         text = st.text_area("Paste your text here", "")
     elif option == "Use sample text":

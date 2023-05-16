@@ -52,7 +52,7 @@ st.markdown('This app makes use of `Streamlit`, `NLTK`, `sumy`, `textblob` and `
 # Add a header for the first section: Select text
 st.header("Add your text to analyze")
 # get text input from user
-input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'])
+input_type = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
 if input_type == 'Paste text':
     text = st.text_area('Enter text to analyze')
 elif input_type == 'Select sample data':
