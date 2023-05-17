@@ -108,7 +108,7 @@ def main():
         # Show the dataframe as a table
         st.subheader("The Magic NLP Dataframe :smile:")
         st.caption("It looks simple, but it is powerful")
-        st.markdown("""This dataframe or table includes several NLP applications at the distance of one click: :blue[**tokenizer**], :green[**lemmatizer**], :orange[**name entity recognition**], :violet[**grammatical dependencies**] and :red[**part of speech**] analyzer. Isn't it magic to have all these NLP applications in one single dataframe?""")
+        st.markdown("""This dataframe or table includes several NLP applications at the distance of one click: :blue[**tokenizer**], :green[**lemmatizer**], :orange[**named entity recognition**], :violet[**grammatical dependencies**] and :red[**part of speech**] analyzer. Isn't it magic to have all these NLP applications in one single dataframe?""")
         show_magic_dataframe(df)
 
         st.divider()  
