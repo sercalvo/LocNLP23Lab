@@ -30,7 +30,7 @@ st.image(page_logo)
 st.markdown(
     """
     # NLP and Localization LAB
-    \n### Welcome to the place where I test my NLP apps ideas!
+    \n### Welcome to the place where I test my NLP ideas!
     \nYou will find some kind of magic, but it's a matter of believing or not. I do believe in the magic of computational linguistics and natural language processing.
     \nI'm sharing a few examples of how using Python and some available libraries and resources, a few things can be done. 
     I have built this app using `Streamlit`, an open-source app framework built specifically for
