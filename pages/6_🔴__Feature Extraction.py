@@ -28,7 +28,7 @@ st.header("Add a text for analysis")
 option = st.radio('Choose input type:', ['Paste text', 'Select sample data', 'Upload file'], help="Only clean text format (.txt file)")
 if option == "Paste text":
     text = st.text_area("Paste your text here", "")
-elif option == "Use sample text":
+elif option == "Select sample data":
     sample_data = {
         "Sample text 1": "John Smith works for Google in Mountain View, California. He can be reached at john.smith@gmail.com.",
         "Sample text 2": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
