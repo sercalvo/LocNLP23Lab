@@ -11,7 +11,7 @@ import re
 import io
 
 st.set_page_config(
-    page_title="LocNLP23Lab - Sentiment & Subjectivity",
+    page_title="LocNLP23Lab - Feature Extraction",
     page_icon="img//V-Logo-icon48.png",
 )
 

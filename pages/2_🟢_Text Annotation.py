@@ -7,6 +7,11 @@ import random
 import colorsys
 import re
 
+st.set_page_config(
+    page_title="LocNLP23Lab - Text Annotation",
+    page_icon="img//V-Logo-icon48.png",
+)
+
 # Load the Spacy model
 nlp = spacy.load("en_core_web_sm")
 
@@ -41,9 +46,7 @@ elif input_type == 'Select sample data':
     sample_data = {
         "Sample text 1 - Chuck Norris": "If an EMP were to go off within a close proximity of Chuck Norris, he would be rendered useless for a short period of time, because over 500 years ago, he traded the ability to see the future to Nostradamus for cybernetic arms, legs, and heart.",
         "Sample text 2 - The fox": "The quick brown fox jumps over the lazy dog.",
-        "Sample text 3 - Huckleberry Fin": """I felt good and all washed clean of sin for the first time I had ever felt so in my life, and I knowed I could pray now. But I didn't do it straight off, but laid the paper down and set there thinking--thinking how good it was all this happened so, and how near I come to being lost and going to hell. And went on thinking. And got to thinking over our trip down the river; and I see Jim before me all the time: in the day and in the night-time, sometimes moonlight, sometimes storms, and we a-floating along, talking and singing and laughing. But somehow I couldn't seem to strike no places to harden me against him, but only the other kind. I'd see him standing my watch on top of his'n, 'stead of calling me, so I could go on sleeping; and see him how glad he was when I come back out of the fog; and when I come to him again in the swamp, up there where the feud was; and such-like times; and would always call me honey, and pet me and do everything he could think of for me, and how good he always was; and at last I struck the time I saved him by telling the men we had small-pox aboard, and he was so grateful, and said I was the best friend old Jim ever had in the world, and the ONLY one he's got now; and then I happened to look around and see that paper.
-                    It was a close place. I took it up, and held it in my hand. I was a-trembling, because I'd got to decide, forever, betwixt two things, and I knowed it. I studied a minute, sort of holding my breath, and then says to myself: All right, then, I'll GO to hell --and tore it up. 
-                    Mark Twain, The Adventures of Huckleberry Finn""",
+        "Sample text 3 - Bonucci": "Bonucci, whose contract expires next season, began his career at Inter Milan in 2005, where he won his first Serie A title in 2005-06. The defender also had spells at Treviso, Pisa, Genoa and Bari before joining Juventus in 2010, becoming part of a famous Juve backline along with Andrea Barzagli, Giorgio Chiellini and goalkeeper Gianluigi Buffon that dominated Italian football for a decade. The Turin giants won nine successive titles between 2011-12 and 2019-20, with Bonucci claiming eight of those after spending one season at AC Milan in 2017-18. Bonucci made his Italy debut in March 2010 and captained the side for the first time four years later. He represented the Azzurri at two World Cups and three European Championships, finishing runner-up at Euro 2012 before lifting the trophy nine years later following a penalty shootout win over England at Wembley.",
         "Sample text 4 - Shakespeare": """
                                 Shall I compare thee to a summer’s day?
                                 Thou art more lovely and more temperate:
@@ -57,10 +60,10 @@ elif input_type == 'Select sample data':
                                 Nor lose possession of that fair thou ow’st;
                                 Nor shall death brag thou wander’st in his shade,
                                 When in eternal lines to time thou grow’st:
-                                   So long as men can breathe or eyes can see,
-                                   So long lives this, and this gives life to thee.
-                                   Sonnet 18: Shall I compare thee to a summer’s day?
-                                   BY WILLIAM SHAKESPEARE
+                                So long as men can breathe or eyes can see,
+                                So long lives this, and this gives life to thee.
+                                Sonnet 18: Shall I compare thee to a summer’s day?
+                                BY WILLIAM SHAKESPEARE
         
         """
     }
