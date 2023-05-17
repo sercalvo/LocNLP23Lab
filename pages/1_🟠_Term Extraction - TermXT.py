@@ -64,7 +64,7 @@ def show_term_extraction_results(text, hits):
 
     if add_lemma:
         #df.insert(2, "lemma", df['Keyword/Keyphrase'].apply(get_lemma))
-        df.insert(2, "lemma", df["Keyword/Keyphrase"].apply(lambda x: " ".join(get_lemma(word) for word in x.split())))
+        df.insert(2, "Lemma", df["Keyword/Keyphrase"].apply(lambda x: " ".join(get_lemma(word) for word in x.split())))
     if add_definition:
         # Add columns for WordNet and Merriam-Webster definitions
         df.insert(3, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
