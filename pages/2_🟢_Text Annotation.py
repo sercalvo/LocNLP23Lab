@@ -92,7 +92,8 @@ if text:
         'VERB': '#D5E8D4',    # light green
         'ADJ': '#FFE0B2',     # light orange
         'ADV': '#EDC8C8',     # light pink
-        'PRON': '#ECC8ED'     # light violet
+        'PRON': '#ECC8ED',     # light violet
+        'PERSON': '#FFE0B2',     # light orange
     }
 
     # Iterate over the tokens in the document
