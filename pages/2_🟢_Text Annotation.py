@@ -93,7 +93,6 @@ if text:
         'ADJ': '#FFE0B2',     # light orange
         'ADV': '#EDC8C8',     # light pink
         'PRON': '#ECC8ED',     # light violet
-        'PERSON': '#FFE0B2',     # light orange
     }
 
     # Iterate over the tokens in the document
@@ -183,14 +182,30 @@ if text:
             ner_entities = [ent.text for ent in doc.ents if ent.label_ in ner_select]
             return ner_entities
         
+        
+        
         # Get the unique named entity labels from the document
         ner_labels = set([ent.label_ for ent in doc.ents])
         
         # Define the colors for named entity labels
         ner_colors = {
             label: color
-            for label, color in zip(ner_labels, ['#FFC0CB', '#F5DEB3', '#87CEFA', '#98FB98'])
+            for label, color in zip(ner_labels, ['#EDC8C8', '#FFE0B2', '#D5E8D4', '#ABD8E4', '#ECC8ED'])
         }
+        
+        # Iterate over the tokens in the document
+        for token in doc:
+            # Check if the POS tag is already in the pos_options dictionary
+            if token.ent_type_ not in ner_colors:
+                # If not, generate a random color similar to the existing colors
+                hue = random.uniform(0, 1)
+                saturation = random.uniform(0.5, 1)
+                lightness = random.uniform(0.5, 1)
+                rgb_color = colorsys.hls_to_rgb(hue, lightness, saturation)
+                hex_color = '#%02x%02x%02x' % tuple(int(c * 255) for c in rgb_color)
+
+                # Assign the color to the POS tag
+                ner_colors[token.ent_type_] = hex_color
         
         def generate_ner_annotated_text(text, ner_select):
             doc = nlp(text)
