@@ -41,14 +41,14 @@ language = st.radio("Choose a language:", ("English", "Spanish"))
 if language == "English":
     nlp = nlp_en
     sample_data = {
-        "Sample text 1": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
-        "Sample text 2": "Google announced a host of new artificial intelligence features coming to its products and services at the company’s annual I/O developer conference yesterday (May 10), where CEO Sundar Pichai mentioned the term “A.I.” 27 times during his 15-minute keynote, per Observer’s count. (Other executives mentioned “A.I.” about 100 additional times over the two-hour event.)"
+        "Sample text 1 - Chuch Norris": "Chuck Norris doesn't churn butter. He roundhouse kicks the cows and the butter comes straight out. When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris CNN was originally created as the 'Chuck Norris Network' to update Americans with on-the-spot ass kicking in real-time.",
+        "Sample text 2 - Google": "Google announced a host of new artificial intelligence features coming to its products and services at the company’s annual I/O developer conference yesterday (May 10), where CEO Sundar Pichai mentioned the term “A.I.” 27 times during his 15-minute keynote, per Observer’s count. (Other executives mentioned “A.I.” about 100 additional times over the two-hour event.)"
     }
 else:
     nlp = nlp_es
     sample_data = {
-        "Sample text 1": "Chuck Norris no cree que haya 50 estados en Estados Unidos. Sólo hay uno: Estado de emergencia. Allá por donde pasa es una emergencia. Chuck Norris hace el desayuno de los campeones. Literalmente. Se comió a Fernando Alonso, Tiger Woods y a Roger Federer en una sola comida.",
-        "Sample text 2": "La inteligencia artificial es la gran apuesta de las principales compañías tecnológicas, y Google acaba de dejar claro que está dispuesta a sacarle el mayor provecho. En su conferencia anual Google I/O en Mountain View, California, el CEO de la Alphabet, Sundar Pichai, habló del objetivo de la compañía para hacer la inteligencia artificial «útil para todos», presentando varios ejemplos de cómo esta tecnología mejorará varios de sus productos."
+        "Sample text 1 - Chuck Norris": "Chuck Norris no cree que haya 50 estados en Estados Unidos. Sólo hay uno: Estado de emergencia. Allá por donde pasa es una emergencia. Chuck Norris hace el desayuno de los campeones. Literalmente. Se comió a Fernando Alonso, Tiger Woods y a Roger Federer en una sola comida.",
+        "Sample text 2 - Google": "La inteligencia artificial es la gran apuesta de las principales compañías tecnológicas, y Google acaba de dejar claro que está dispuesta a sacarle el mayor provecho. En su conferencia anual Google I/O en Mountain View, California, el CEO de la Alphabet, Sundar Pichai, habló del objetivo de la compañía para hacer la inteligencia artificial «útil para todos», presentando varios ejemplos de cómo esta tecnología mejorará varios de sus productos."
     }
 
 
