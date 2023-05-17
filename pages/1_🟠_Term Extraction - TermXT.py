@@ -70,8 +70,8 @@ def show_term_extraction_results(text, hits):
         df.insert(3, "WordNet Definition", df["Keyword/Keyphrase"].apply(get_wordnet_definition) )
         df.insert(4, "Merriam-Webster Definition", df["Keyword/Keyphrase"].apply(get_merriam_webster_definition) )
     if add_context:
-        df.insert(3, "Context Sentence 1", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[0]))
-        df.insert(3, "Context Sentence 2", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[1]))
+        df.insert(3, "Context Sentence1", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[0]))
+        df.insert(3, "Context Sentence2", df["Keyword/Keyphrase"].apply(lambda x: get_random_context(x, text)[1]))
         
     # Adjust the index to start at 1
     df.index += 1
