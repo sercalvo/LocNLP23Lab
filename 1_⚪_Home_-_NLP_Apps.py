@@ -35,7 +35,10 @@ st.markdown(
     \nI'm sharing a few examples of how using Python and some available libraries and resources, a few things can be done. 
     I have built this app using `Streamlit`, an open-source app framework built specifically for
     Machine Learning and Data Science projects. Behind, there's a full range of libraries and Python code, of course. I am not an expert, but do take advantage of libraries like `Spacy`, `NLTK`, `Transformers`, `Pandas`, `scikit-learn`, `Beautiful Soup`, `TextBlob`, `Gensim`, `PyTorch` and many others!
-    \nThe goal? Unveil the secrets of languages, no matter if they are meant for humans or computers.
+    \nThe goal? Unveil the secrets of languages, no matter if they are meant for humans or computers. The main NLP applications that you will find in this web app are:
+         \n`Tokenization`, `Lemmatization`, `Embeddings and vectorization`, `Part of Speech and dependency analyzer`, `Feature extraction`, `Text generation`, `Sentiment analysis`, `Term extraction`
+         \nNew ideas are often like waves returning all the time to embrace the shore. I will be in the beach waiting for the new wave. There is plenty of ideas to surf!
+    
     \nEnjoy the ride! 	:bike:
     \n:smiley: Sergio Calvo
 """
