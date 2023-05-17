@@ -1,3 +1,5 @@
+
+![](https://github.com/Sercalvo/LocNLP23Lab/blob/main/img/LocNLP23lab.png)
 # NLP and Localization LAB
 ### Welcome to the place where I test my NLP ideas!
 You will find some kind of magic, but it's a matter of believing or not. I do believe in the magic of computational linguistics and natural language processing.
