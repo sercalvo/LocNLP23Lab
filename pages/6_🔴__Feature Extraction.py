@@ -60,7 +60,7 @@ if text:
     st.caption("Showing only first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
-    st.markdown(f'<div style="height: 200px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="height: 150px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
 
 # Process the text
 if st.button("Extract information from text"):
