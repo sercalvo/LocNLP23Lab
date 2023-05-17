@@ -145,6 +145,7 @@ if text:
     # Todas las palabras
     ###st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{text}</div>', unsafe_allow_html=True) # Todas las palabras
     # Solo 1000 palabras para mostrar
+    st.caption("Showing only first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
     st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
@@ -157,7 +158,7 @@ if text:
 
 
     # Create the word cloud and display it
-    st.title("Your Word Cloud")
+    st.title("Your Wordcloud")
     #st.markdown(text)
     # Create a word cloud object
     #texto = open_file(file)

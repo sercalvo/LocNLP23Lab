@@ -138,7 +138,10 @@ else:
 
 if text:
     st.subheader('Text to analyze')
-    st.markdown(f":green[{text}]")
+    st.caption("Showing only first 1000 words in the text")
+    words = text.split()[:1000]
+    limited_text = ' '.join(words)
+    st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
 
 # display the annotated text
 terms = []

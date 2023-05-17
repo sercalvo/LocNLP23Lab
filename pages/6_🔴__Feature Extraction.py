@@ -57,10 +57,10 @@ elif option == "Upload file":
 if text:
     # Display the selected text
     st.subheader("Text to analyze")
-    #st.write(string_data)
-    st.markdown(f":green[{text}]")
-    ##st.info(f":blue[{text}]")
-    #st.success(text)
+    st.caption("Showing only first 1000 words in the text")
+    words = text.split()[:1000]
+    limited_text = ' '.join(words)
+    st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
 
 # Process the text
 if st.button("Extract information from text"):

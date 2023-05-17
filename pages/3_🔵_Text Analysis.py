@@ -93,9 +93,10 @@ def main():
     if text != "":
             
         # Display the selected text
+        st.caption("Showing only first 1000 words in the text")
         words = text.split()[:1000]
         limited_text = ' '.join(words)
-        st.markdown(f'<div style="height: 200px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
     
         
         # Process the text
