@@ -173,7 +173,7 @@ st.write("This app aims at providing contextual information for term harvesting.
 
 # Terms input for metadata populating
 st.subheader('Add your terms for metadata generation')
-input_terms= "".join(st.text_area('Add your own keywords, phrases or terms separated by comma', 'sample term', key="my_input_kw_area", help="Use comma without space to separate the terms like: electrical energy,kinetic energy,modern wind turbines,rotational energy,wind,rotor blades,motion,generator")).split(sep=",")
+input_terms= "".join(st.text_area('Add your own keywords, phrases or terms separated by comma', 'terminology, term', key="my_input_kw_area", help="Use comma without space to separate the terms like: electrical energy,kinetic energy,modern wind turbines,rotational energy,wind,rotor blades,motion,generator")).split(sep=",")
 
 # Term extraction settings
 #hits = st.number_input("Maximum number of terms", min_value=1, value=5)
