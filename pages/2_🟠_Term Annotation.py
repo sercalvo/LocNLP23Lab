@@ -103,7 +103,7 @@ if "checkbox" not in st.session_state:
     st.session_state["disabled"] = False
 
 # Add a page title for the app
-st.title(':large_green_circle: Term Annotation :male-detective:')
+st.title(':large_orange_circle: Term Annotation :male-detective:')
 st.markdown('This app makes use of `Spacy` library to provide nice visualizations of terms and keywords.')
 
 # Add a header for the first section: Select text
