@@ -146,6 +146,7 @@ if text:
     # Todas las palabras
     ###st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{text}</div>', unsafe_allow_html=True) # Todas las palabras
     # Solo 1000 palabras para mostrar
+    words = count_words(text)
     st.caption(f"The text contains `{words}` words. Showing the first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
