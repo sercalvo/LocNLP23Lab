@@ -196,7 +196,7 @@ num_words = count_words(text)
 
 if text:
     st.subheader('Text to analyze')
-    st.caption("Showing only first 1000 words in the text")
+    st.caption(f"The text contains `{words}` words. Showing the first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
     st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)

@@ -16,9 +16,9 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 from textblob import TextBlob
 from textblob.classifiers import NaiveBayesClassifier
 import plotly.graph_objects as go
-
 import os
 from os import path
+from vfunctions import count_words
 
 st.set_page_config(
     page_title="LocNLP23Lab - Sentiment & Subjectivity",
@@ -73,7 +73,7 @@ else:
 if text:
     st.subheader('Text to analyze')
     #st.markdown(f":green[{text}]")
-    st.caption("Showing only first 1000 words in the text")
+    st.caption(f"The text contains `{words}` words. Showing the first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
     st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)
