@@ -168,7 +168,7 @@ def translate_term(term, target_language):
 
 
 # Streamlit app code
-st.title(":large_orange_circle: Metadata generation for term harvesting 	:face_with_monocle:")
+st.title(":large_orange_circle: Metadata generation for term harvesting :books:")
 st.write("This app aims at providing contextual information for term harvesting. It retrieves a range of details for the terms, such as grammatical information, context sentences and several definitions from diferent sources.")
 
 # Terms input for metadata populating
