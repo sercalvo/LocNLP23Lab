@@ -8,9 +8,12 @@ Created on Fri Dec  9 00:32:37 2022
 import streamlit as st  
 import spacy
 from spacy import displacy
+
+import spacy
+from spacy import displacy
+
 import os
 from os import path
-from vfunctions import count_words
 
 st.set_page_config(
     page_title="LocNLP23Lab - Dependency & NER",
@@ -71,8 +74,7 @@ doc = nlp(text)
 
 if text:
     st.subheader('Text to analyze')
-    words = count_words(text)
-    st.caption(f"The text contains `{words}` words. Showing the first 1000 words in the text")
+    st.caption("Showing only first 1000 words in the text")
     words = text.split()[:1000]
     limited_text = ' '.join(words)
     st.markdown(f'<div style="height: 300px; overflow-y: scroll;">{limited_text}</div>', unsafe_allow_html=True)

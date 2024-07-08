@@ -6,7 +6,6 @@ from annotated_text import annotated_text
 import random
 import colorsys
 import re
-from vfunctions import count_words
 
 st.set_page_config(
     page_title="LocNLP23Lab - Text Annotation",
