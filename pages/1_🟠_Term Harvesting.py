@@ -16,7 +16,7 @@ from pandas import DataFrame
 from translate import Translator
 
 # Instantiate Wikipedia API client
-wiki_api = wikipediaapi.Wikipedia('en')
+wiki_api = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)','en')
 
 def create_df(terms):
     # Perform term extraction using your preferred method
