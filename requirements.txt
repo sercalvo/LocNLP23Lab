@@ -10,7 +10,7 @@ keybert==0.8.5
 keyphrase_vectorizers==0.0.13
 matplotlib==3.9.2
 nltk==3.8.1
-numpy==2.1.1
+numpy
 pandas==2.2.2
 Pillow==10.4.0
 plotly==5.24.0
