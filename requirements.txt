@@ -19,7 +19,7 @@ scikit_learn==1.5.1
 seaborn==0.13.2
 spacy==3.7.5
 st_annotated_text==4.0.1
-streamlit==1.36.0
+streamlit==1.38.0
 streamlit_option_menu==0.3.13
 sumy==0.11.0
 tensorflow==2.17.0
