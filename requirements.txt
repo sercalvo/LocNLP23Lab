@@ -29,4 +29,4 @@ transformers==4.36.2
 translate==3.6.1
 Wikipedia_API==0.7.1
 wordcloud==1.9.3
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz	
